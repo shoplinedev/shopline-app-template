@@ -11,7 +11,7 @@
   "dependencies": {},
   "author": "SHOPLINE",
   "devDependencies": {
-    "@shoplinedev/app": "internal",
-    "@shoplinedev/cli": "internal"
+    "@shoplinedev/app": "next",
+    "@shoplinedev/cli": "next"
   }
 }
