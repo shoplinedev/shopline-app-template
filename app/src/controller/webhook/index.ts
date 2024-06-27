@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
-import shopline from './shopline';
+import shopline from '../../shopline';
 
-export const webhooks: () => RequestHandler = () => async (_req, res) => {
+export const webhooksController: () => RequestHandler = () => async (_req, res) => {
   try {
     const data = await shopline.webhookAuthentication(_req);
     const { topic, session, payload } = data;

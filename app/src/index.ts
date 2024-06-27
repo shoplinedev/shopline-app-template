@@ -3,8 +3,8 @@ import { join } from 'path';
 import shopline from './shopline';
 import { readFileSync } from 'fs';
 import serveStatic from 'serve-static';
-import { webhooks } from './webhooks';
-import createProduct from './create-product';
+import { webhooksController } from './controller/webhook';
+import createProductController from './controller/product/create';
 
 const PORT = parseInt(process.env.BACKEND_PORT || process.env.PORT, 10);
 
@@ -18,31 +18,12 @@ const app = express();
 app.get(shopline.config.auth.path, shopline.auth.begin());
 
 app.get(shopline.config.auth.callbackPath, shopline.auth.callback(), shopline.redirectToAppHome());
-app.post('/api/webhooks', express.text({ type: '*/*' }), webhooks());
+app.post('/api/webhooks', express.text({ type: '*/*' }), webhooksController());
 
 // api path for frontend/vite.config
 app.use('/api/*', express.text({ type: '*/*' }), shopline.validateAuthentication());
 
-app.get('/api/products/create', async (_req, res) => {
-  let status = 200;
-  let error = null;
-  let response;
-
-  try {
-    const { handle, accessToken } = res.locals.shopline.session;
-    response = await createProduct(handle, accessToken, _req.headers);
-  } catch (e) {
-    console.log(`Failed to process products/create: ${e.message}`);
-    status = 500;
-    error = e.message;
-  }
-  res
-    .status(status)
-    .set({
-      traceid: response.headers.get('traceid')?.split(',')?.[0],
-    })
-    .send({ success: status === 200, error, data: response.data });
-});
+app.get('/api/products/create', createProductController);
 
 app.use(express.json());
 
