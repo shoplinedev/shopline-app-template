@@ -12,8 +12,8 @@
   "author": "SHOPLINE",
   "license": "ISC",
   "dependencies": {
-    "@shoplinedev/shopline-app-express": "^0.0.4",
-    "@shoplinedev/shopline-app-session-storage-sqlite": "^0.0.4",
+    "@shoplineos/shopline-app-express": "^0.1.1",
+    "@shoplineos/shopline-app-session-storage-sqlite": "^0.1.1",
     "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",

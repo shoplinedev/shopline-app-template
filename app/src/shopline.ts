@@ -1,5 +1,5 @@
-import { shoplineApp } from '@shoplinedev/shopline-app-express';
-import { SQLiteSessionStorage } from '@shoplinedev/shopline-app-session-storage-sqlite';
+import { shoplineApp } from '@shoplineos/shopline-app-express';
+import { SQLiteSessionStorage } from '@shoplineos/shopline-app-session-storage-sqlite';
 import 'dotenv/config';
 
 const DB_PATH = `${process.cwd()}/database.sqlite`;
